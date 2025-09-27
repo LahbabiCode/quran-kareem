@@ -5,19 +5,108 @@
   <title>Quran Kareem</title>
   <base href="/" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A comprehensive Quran application to read, listen, and explore the Holy Quran. It features multiple reciters, radio stations, translations, and a beautiful, user-friendly interface.">
+  <meta name="description" content="منصة شاملة للقرآن الكريم مع خدمات إسلامية متنوعة - A comprehensive digital platform for the Holy Quran with diverse Islamic services including prayer times, qibla direction, digital tasbih, adhkar, and Asma ul Husna.">
+  <meta name="keywords" content="quran,قرآن,islamic,إسلامي,muslim,مسلم,prayer times,أوقات الصلاة,qibla,قبلة,tasbih,تسبيح,adhkar,أذكار,asma ul husna,الأسماء الحسنى,holy quran,القرآن الكريم,recitation,تلاوة">
+  <meta name="author" content="LahbabiCode">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Arabic, English">
+  <meta name="theme-color" content="#059669">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Quran Kareem">
+  <meta name="application-name" content="Quran Kareem">
+  <meta name="msapplication-TileColor" content="#059669">
+  <meta name="msapplication-TileImage" content="/icon-192.png">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://quran-kareem-app.netlify.app/">
+  
+  <!-- Manifest and Icons -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#059669">
+  
+  <!-- Sitemap -->
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="//api.alquran.cloud">
+  <link rel="dns-prefetch" href="//api.aladhan.com">
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" as="style">
+  
+  <!-- Alternate language versions -->
+  <link rel="alternate" hreflang="ar" href="https://quran-kareem-app.netlify.app/?lang=ar">
+  <link rel="alternate" hreflang="en" href="https://quran-kareem-app.netlify.app/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://quran-kareem-app.netlify.app/">
+  
+  <!-- Schema.org markup for Islamic App -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Quran Kareem - القرآن الكريم",
+    "description": "منصة شاملة للقرآن الكريم مع خدمات إسلامية متنوعة - A comprehensive digital platform for the Holy Quran with diverse Islamic services",
+    "url": "https://quran-kareem-app.netlify.app",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "LahbabiCode",
+      "url": "https://github.com/LahbabiCode"
+    },
+    "inLanguage": ["ar", "en"],
+    "keywords": "quran, islamic, muslim, prayer times, qibla, tasbih, adhkar, asma ul husna, holy quran, recitation",
+    "featureList": [
+      "Complete Quran with audio recitation",
+      "Prayer times calculation",
+      "Qibla direction finder",
+      "Digital tasbih counter",
+      "Islamic adhkar collection",
+      "99 names of Allah (Asma ul Husna)",
+      "Bookmarks and favorites",
+      "Multiple reciters support",
+      "Islamic radio stations",
+      "Offline reading capability"
+    ],
+    "screenshot": "https://quran-kareem-app.netlify.app/screenshot1.png",
+    "softwareVersion": "1.0.0",
+    "datePublished": "2024-01-01",
+    "dateModified": "2024-01-01"
+  }
+  </script>
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Quran Kareem">
-  <meta property="og:description" content="A comprehensive Quran application to read, listen, and explore the Holy Quran.">
-  <meta property="og:image" content="https://picsum.photos/seed/quran-app-main/1200/630">
+  <meta property="og:site_name" content="Quran Kareem - القرآن الكريم">
+  <meta property="og:title" content="Quran Kareem - منصة شاملة للقرآن الكريم">
+  <meta property="og:description" content="منصة رقمية شاملة للقرآن الكريم مع خدمات إسلامية متنوعة: أوقات الصلاة، اتجاه القبلة، التسبيح الرقمي، الأذكار، والأسماء الحسنى">
+  <meta property="og:url" content="https://quran-kareem-app.netlify.app">
+  <meta property="og:image" content="https://quran-kareem-app.netlify.app/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Quran Kareem - Islamic Digital Platform">
+  <meta property="og:locale" content="ar_SA">
+  <meta property="og:locale:alternate" content="en_US">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Quran Kareem">
-  <meta name="twitter:description" content="A comprehensive Quran application to read, listen, and explore the Holy Quran.">
-  <meta name="twitter:image" content="https://picsum.photos/seed/quran-app-main/1200/630">
+  <meta name="twitter:site" content="@LahbabiCode">
+  <meta name="twitter:creator" content="@LahbabiCode">
+  <meta name="twitter:title" content="Quran Kareem - منصة شاملة للقرآن الكريم">
+  <meta name="twitter:description" content="منصة رقمية شاملة للقرآن الكريم مع خدمات إسلامية متنوعة">
+  <meta name="twitter:image" content="https://quran-kareem-app.netlify.app/og-image.png">
+  <meta name="twitter:image:alt" content="Quran Kareem - Islamic Digital Platform">
 
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -67,6 +156,107 @@
 <link rel="stylesheet" href="/index.css">
 </head>
 <body class="bg-slate-950 text-slate-200 antialiased">
+  <!-- Loading Screen -->
+  <div id="initial-loader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; display: flex; justify-content: center; align-items: center; z-index: 9999;">
+    <div style="text-align: center; color: #14b8a6;">
+      <div style="width: 50px; height: 50px; border: 3px solid #334155; border-top: 3px solid #14b8a6; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+      <h2 style="font-family: 'Amiri', serif; font-size: 24px; margin: 0; color: #14b8a6;">القرآن الكريم</h2>
+      <p style="margin: 10px 0 0; font-size: 14px; color: #64748b;">جاري التحميل...</p>
+    </div>
+  </div>
+  
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  
   <app-root></app-root>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    // Hide loader when app loads
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('initial-loader');
+        if (loader) {
+          loader.style.opacity = '0';
+          loader.style.transition = 'opacity 0.5s ease-out';
+          setTimeout(() => loader.remove(), 500);
+        }
+      }, 1000);
+    });
+    
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('SW registered: ', registration);
+            
+            // Check for updates
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed') {
+                  if (navigator.serviceWorker.controller) {
+                    // New update available
+                    if (confirm('تحديث جديد متوفر، هل تريد تحديث التطبيق؟\nNew update available, would you like to refresh?')) {
+                      newWorker.postMessage({ type: 'SKIP_WAITING' });
+                      window.location.reload();
+                    }
+                  }
+                }
+              });
+            });
+          })
+          .catch((registrationError) => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+      
+      // Handle service worker updates
+      let refreshing;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (refreshing) return;
+        window.location.reload();
+        refreshing = true;
+      });
+    }
+    
+    // Install prompt for PWA
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      
+      // Show install button or banner
+      const installBanner = document.createElement('div');
+      installBanner.innerHTML = `
+        <div style="position: fixed; bottom: 20px; right: 20px; background: #14b8a6; color: white; padding: 15px 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000; font-family: Arial, sans-serif;">
+          <p style="margin: 0 0 10px; font-size: 14px;">تثبيت تطبيق القرآن الكريم؟<br>Install Quran Kareem app?</p>
+          <button id="install-btn" style="background: white; color: #14b8a6; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; margin-right: 10px;">تثبيت Install</button>
+          <button id="dismiss-btn" style="background: transparent; color: white; border: 1px solid white; padding: 8px 16px; border-radius: 5px; cursor: pointer;">لاحقاً Later</button>
+        </div>
+      `;
+      document.body.appendChild(installBanner);
+      
+      document.getElementById('install-btn').addEventListener('click', () => {
+        installBanner.remove();
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+          }
+          deferredPrompt = null;
+        });
+      });
+      
+      document.getElementById('dismiss-btn').addEventListener('click', () => {
+        installBanner.remove();
+      });
+    });
+  </script>
 </body>
 </html>
