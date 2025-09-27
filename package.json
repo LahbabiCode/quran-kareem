@@ -17,9 +17,21 @@
     "url": "https://github.com/LahbabiCode/quran-kareem/issues"
   },
   "keywords": [
-    "quran", "islamic", "muslim", "arabic", "prayer-times", "qibla", 
-    "tasbih", "adhkar", "asma-ul-husna", "holy-quran", "recitation",
-    "angular", "typescript", "tailwindcss", "pwa"
+    "quran",
+    "islamic",
+    "muslim",
+    "arabic",
+    "prayer-times",
+    "qibla",
+    "tasbih",
+    "adhkar",
+    "asma-ul-husna",
+    "holy-quran",
+    "recitation",
+    "angular",
+    "typescript",
+    "tailwindcss",
+    "pwa"
   ],
   "engines": {
     "node": ">=20.19.0",
@@ -33,7 +45,7 @@
     "build": "ng build --configuration=production && npm run postbuild",
     "build:dev": "ng build",
     "postbuild": "npm run copy-assets",
-    "copy-assets": "copy dist\\public\\manifest.json dist\\manifest.json && copy dist\\public\\robots.txt dist\\robots.txt && copy dist\\public\\sitemap.xml dist\\sitemap.xml && copy dist\\public\\_redirects dist\\_redirects",
+    "copy-assets": "copyfiles -f dist/public/* dist/",
     "preview": "ng serve --configuration=production",
     "test": "echo \"No tests specified\" && exit 0",
     "lint": "ng lint",
@@ -61,6 +73,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
+    "copyfiles": "^2.4.1",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }
