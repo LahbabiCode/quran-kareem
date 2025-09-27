@@ -26,18 +26,15 @@
           @if(isMoreMenuOpen()) {
             <div class="absolute right-0 rtl:left-0 rtl:right-auto mt-2 w-56 rounded-md shadow-lg bg-slate-800 ring-1 ring-slate-700 z-50">
               <div class="py-1">
-                <!-- الخدمات الدينية -->
+                <!-- الخدمات الدينية المتوفرة -->
                 <div class="px-3 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-slate-700">{{ t('Religious Services')() }}</div>
                 <a routerLink="/tasbih" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('Digital Tasbih')() }}</a>
                 <a routerLink="/adhkar" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('Adhkar')() }}</a>
                 <a routerLink="/asma-ul-husna" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('99 Names of Allah')() }}</a>
-                <a routerLink="/hadith" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('Hadith')() }}</a>
                 
                 <!-- أدوات مفيدة -->
                 <div class="px-3 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-t border-slate-700 mt-1">{{ t('Useful Tools')() }}</div>
-                <a routerLink="/zakat-calculator" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('Zakat Calculator')() }}</a>
-                <a routerLink="/quran-plan" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('Quran Reading Plan')() }}</a>
-                <a routerLink="/islamic-calendar" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('Islamic Calendar')() }}</a>
+                <div class="px-4 py-2 text-sm text-slate-500">{{ t('Coming Soon')() }}...</div>
                 
                 <!-- معلومات -->
                 <div class="px-3 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-t border-slate-700 mt-1">{{ t('Information')() }}</div>

@@ -162,6 +162,7 @@ export class LanguageService {
       'Religious Services': 'الخدمات الدينية',
       'Useful Tools': 'أدوات مفيدة',
       'Information': 'المعلومات',
+      'Coming Soon': 'قريبًا',
       
       // المسبحة الرقمية
       'Digital Tasbih': 'المسبحة الرقمية',
@@ -436,6 +437,7 @@ export class LanguageService {
       'Religious Services': 'Religious Services',
       'Useful Tools': 'Useful Tools',
       'Information': 'Information',
+      'Coming Soon': 'Coming Soon',
       
       // Digital Tasbih
       'Digital Tasbih': 'Digital Tasbih',

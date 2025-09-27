@@ -24,7 +24,7 @@ export const APP_ROUTES: Routes = [
   { path: 'prayer-times', component: PrayerTimesComponent },
   { path: 'about', component: AboutComponent },
   
-  // خدمات إسلامية جديدة - الأدوات الدينية
+  // خدمات إسلامية جديدة - الأدوات الدينية (المتوفرة حاليًا)
   { 
     path: 'tasbih', 
     loadComponent: () => import('./components/tasbih/tasbih.component').then(m => m.TasbihComponent) 
@@ -36,24 +36,6 @@ export const APP_ROUTES: Routes = [
   { 
     path: 'asma-ul-husna', 
     loadComponent: () => import('./components/asma-ul-husna/asma-ul-husna.component').then(m => m.AsmaUlHusnaComponent) 
-  },
-  { 
-    path: 'hadith', 
-    loadComponent: () => import('./components/hadith/hadith.component').then(m => m.HadithComponent) 
-  },
-  
-  // أدوات مفيدة
-  { 
-    path: 'zakat-calculator', 
-    loadComponent: () => import('./components/zakat-calculator/zakat-calculator.component').then(m => m.ZakatCalculatorComponent) 
-  },
-  { 
-    path: 'quran-plan', 
-    loadComponent: () => import('./components/quran-plan/quran-plan.component').then(m => m.QuranPlanComponent) 
-  },
-  { 
-    path: 'islamic-calendar', 
-    loadComponent: () => import('./components/islamic-calendar/islamic-calendar.component').then(m => m.IslamicCalendarComponent) 
   },
   
   { path: '**', redirectTo: '' }
