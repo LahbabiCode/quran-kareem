@@ -21,6 +21,10 @@
     "tasbih", "adhkar", "asma-ul-husna", "holy-quran", "recitation",
     "angular", "typescript", "tailwindcss", "pwa"
   ],
+  "engines": {
+    "node": ">=20.19.0",
+    "npm": ">=10.0.0"
+  },
   "private": false,
   "type": "module",
   "scripts": {
