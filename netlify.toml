@@ -1,16 +1,45 @@
 [build]
-  publish = "dist/quran-kareem-v6"
-  command = "npm run build"
-
+  publish = "dist"
+  command = "npm ci --legacy-peer-deps && npm run build"
+  
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "18"
   NPM_FLAGS = "--legacy-peer-deps"
+  CI = "true"
+  
+# إعداد Node.js للبيلد  
+[build.processing]
+  skip_processing = false
+
+# معالجة ملفات CSS و JS
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+  
+[build.processing.html]
+  pretty_urls = true
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
   force = false
+
+# إعادة توجيه خاص لـ Angular routes
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# إعادة توجيه للملفات الثابتة
+[[redirects]]
+  from = "/assets/*"
+  to = "/assets/:splat"
+  status = 200
 
 [context.production.environment]
   GEMINI_API_KEY = "YOUR_PRODUCTION_GEMINI_API_KEY"

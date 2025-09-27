@@ -26,16 +26,19 @@
   "scripts": {
     "dev": "ng serve",
     "start": "ng serve",
-    "build": "ng build --configuration=production",
+    "build": "ng build --configuration=production && npm run postbuild",
     "build:dev": "ng build",
+    "postbuild": "npm run copy-assets",
+    "copy-assets": "copy dist\\public\\manifest.json dist\\manifest.json && copy dist\\public\\robots.txt dist\\robots.txt && copy dist\\public\\sitemap.xml dist\\sitemap.xml && copy dist\\public\\_redirects dist\\_redirects",
     "preview": "ng serve --configuration=production",
     "test": "echo \"No tests specified\" && exit 0",
     "lint": "ng lint",
     "format": "prettier --write \"src/**/*.{ts,html,css,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,html,css,json}\"",
-    "deploy": "npm run build && npx netlify deploy --prod --dir=dist/quran-kareem",
-    "deploy:preview": "npm run build && npx netlify deploy --dir=dist/quran-kareem",
-    "analyze": "ng build --stats-json && npx webpack-bundle-analyzer dist/quran-kareem/stats.json"
+    "deploy": "npm run build && npx netlify deploy --prod --dir=dist",
+    "deploy:preview": "npm run build && npx netlify deploy --dir=dist",
+    "analyze": "ng build --stats-json && npx webpack-bundle-analyzer dist/stats.json",
+    "netlify:build": "npm run build && echo 'Build completed successfully!'"
   },
   "dependencies": {
     "@angular/build": "^20.3.0",

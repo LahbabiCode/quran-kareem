@@ -1,0 +1,13 @@
+/*    /index.html   200
+
+# API routes (if any future API endpoints)
+/api/*  /.netlify/functions/:splat  200
+
+# Static assets
+/assets/*  /assets/:splat  200
+/icons/*   /icons/:splat   200
+
+# SEO files
+/sitemap.xml   /sitemap.xml   200
+/robots.txt    /robots.txt    200
+/manifest.json /manifest.json 200

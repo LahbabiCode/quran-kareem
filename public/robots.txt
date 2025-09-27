@@ -1,0 +1,48 @@
+User-agent: *
+Allow: /
+
+# SEO files
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /manifest.json
+
+# Static assets
+Allow: /assets/
+Allow: /icons/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.ico
+
+# Main sections
+Allow: /surahs
+Allow: /reciters
+Allow: /radio
+Allow: /qibla
+Allow: /prayer-times
+Allow: /tasbih
+Allow: /adhkar
+Allow: /asma-ul-husna
+Allow: /favorites
+Allow: /bookmarks
+Allow: /about
+
+# Dynamic routes
+Allow: /surah/
+Allow: /reciter/
+
+# Block admin or sensitive paths (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.env
+Disallow: /config/
+
+# Crawl-delay for politeness
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://quran-kareem-app.netlify.app/sitemap.xml
