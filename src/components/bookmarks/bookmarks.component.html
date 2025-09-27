@@ -1,0 +1,81 @@
+<div class="space-y-8">
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <h1 class="text-3xl font-bold text-teal-400 font-amiri">{{ t('My Bookmarks')() }}</h1>
+    <div class="relative w-full md:w-64">
+        <div class="absolute inset-y-0 left-0 rtl:left-auto rtl:right-0 flex items-center pl-3 rtl:pl-0 rtl:pr-3 pointer-events-none">
+            <app-search-icon class="text-slate-400"></app-search-icon>
+        </div>
+        <input 
+            type="text" 
+            [placeholder]="t('Search bookmarks...')()"
+            (input)="onSearch($event)"
+            class="w-full pl-10 rtl:pl-4 rtl:pr-10 pr-4 py-2 bg-slate-800 border border-slate-600 text-slate-200 rounded-lg focus:ring-teal-500 focus:border-teal-500" />
+    </div>
+  </div>
+
+  <!-- Bookmarked Ayahs Section -->
+  <section class="space-y-4">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-700 pb-2">
+      <h2 class="text-2xl font-semibold text-slate-200">{{ t('Bookmarked Ayahs')() }}</h2>
+       @if(detailedBookmarkedAyahs().length) {
+        <div class="flex items-center gap-2">
+          <label for="ayah-sort" class="text-sm font-medium text-slate-400">{{ t('Sort by')() }}:</label>
+          <select id="ayah-sort" (change)="setAyahSortOrder($event)" class="p-2 bg-slate-800 border border-slate-600 text-slate-200 rounded-md text-sm focus:ring-teal-500 focus:border-teal-500">
+            <option value="number">{{ t('Ayah Number')() }}</option>
+            <option value="date">{{ t('Date Added')() }}</option>
+          </select>
+        </div>
+       }
+    </div>
+    @if (!detailedBookmarkedAyahs().length && !searchTerm()) {
+      <div class="text-center py-16 px-6 bg-slate-800/50 border border-slate-700 rounded-lg shadow-sm">
+        <div class="flex justify-center items-center mb-4">
+            <div class="w-16 h-16 bg-slate-700 rounded-full flex items-center justify-center">
+                <app-bookmark-icon [customClass]="'w-8 h-8 text-slate-400'"></app-bookmark-icon>
+            </div>
+        </div>
+        <h3 class="text-xl font-semibold text-slate-100">{{ t('No bookmarks yet.')() }}</h3>
+        <p class="mt-2 text-slate-400 max-w-md mx-auto">
+          {{ t('You can add ayahs to your bookmarks by clicking the bookmark icon on any surah page.')() }}
+        </p>
+        <a routerLink="/surahs" class="mt-6 inline-block px-6 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
+          {{ t('Explore Surahs')() }}
+        </a>
+      </div>
+    } @else {
+      @if (!sortedBookmarkedAyahs().length) {
+       <p class="text-slate-400 py-4">{{ t('No bookmarks found matching your search.')() }}</p>
+      } @else {
+        <div class="space-y-4">
+          @for (ayah of sortedBookmarkedAyahs(); track `${ayah.surahId}:${ayah.numberInSurah}`) {
+            <div class="p-4 bg-slate-800/50 border border-slate-700 rounded-lg shadow-sm flex items-start justify-between gap-4">
+              <div class="flex-grow">
+                <a [routerLink]="['/surah', ayah.surahId]" class="hover:underline">
+                  <p class="text-sm text-slate-400 mb-2">{{ ayah.surahName }} - Ayah {{ ayah.numberInSurah }}</p>
+                </a>
+                <p class="text-2xl font-amiri leading-loose text-right text-slate-100">
+                  {{ ayah.text }}
+                </p>
+                @if(ayah.translation) {
+                  <div class="mt-4 pt-4 border-t border-slate-700">
+                    <p class="text-slate-300 leading-relaxed" [dir]="'ltr'">
+                      <span class="font-semibold">{{ ayah.numberInSurah }}.</span> {{ ayah.translation }}
+                    </p>
+                    @if(ayah.transliteration) {
+                      <p class="text-sm text-slate-400 mt-2 italic" [dir]="'ltr'">
+                        {{ ayah.transliteration }}
+                      </p>
+                    }
+                  </div>
+                }
+              </div>
+              <button (click)="unbookmarkAyah(ayah.surahId, ayah.numberInSurah!)" class="p-2 rounded-full text-indigo-400 hover:bg-slate-700 transition-colors flex-shrink-0" [title]="t('Remove from bookmarks')()">
+                <app-bookmark-solid-icon></app-bookmark-solid-icon>
+              </button>
+            </div>
+          }
+        </div>
+      }
+    }
+  </section>
+</div>

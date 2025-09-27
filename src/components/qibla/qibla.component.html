@@ -1,0 +1,75 @@
+@if(isCalibrated()) {
+<div class="space-y-8 flex flex-col items-center">
+  <div class="text-center">
+    <h1 class="text-3xl font-bold text-teal-400 font-amiri">{{ t('Qibla Direction')() }}</h1>
+    <p class="mt-2 text-slate-400">{{ t('Find the direction to the Kaaba')() }}</p>
+  </div>
+
+  <div class="w-full max-w-sm flex flex-col items-center gap-6">
+    <!-- Compass -->
+    <div class="relative w-64 h-64 rounded-full bg-slate-800 shadow-lg border-4 border-slate-700">
+      <!-- Compass Rose -->
+      <div class="absolute inset-0 transition-transform duration-300 ease-linear" [style.transform]="'rotate(' + (-heading()) + 'deg)'">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 -mt-3 text-lg font-bold text-red-500">N</div>
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 -mb-3 text-lg font-semibold text-slate-400">S</div>
+        <div class="absolute left-0 top-1/2 -translate-y-1/2 -ml-3 text-lg font-semibold text-slate-400">W</div>
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 -mr-3 text-lg font-semibold text-slate-400">E</div>
+        <div class="w-full h-full border-slate-600 border-t-2 border-b-2 border-l-2 border-r-2 rounded-full"></div>
+      </div>
+      
+      <!-- Qibla Arrow -->
+      @if(userLocation()){
+        <div class="absolute inset-0 transition-transform duration-300 ease-out" [style.transform]="'rotate(' + (qiblaDirection() - heading()) + 'deg)'">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 h-1/2 w-10 text-teal-500">
+                <app-qibla-arrow></app-qibla-arrow>
+            </div>
+        </div>
+      }
+      <!-- Center point -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-slate-400 rounded-full"></div>
+    </div>
+
+    <!-- Status & Info -->
+    <div class="text-center p-4 bg-slate-800/50 rounded-lg w-full space-y-3">
+      @if (locationError()) {
+        <p class="text-red-500 font-semibold">{{ locationError() }}</p>
+        <button (click)="getLocation()" class="mt-4 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors">
+          {{ t('Get Location')() }}
+        </button>
+      } @else if (!userLocation()) {
+        <div class="flex items-center justify-center gap-2 text-slate-400">
+            <app-loading-spinner customClass="w-5 h-5"></app-loading-spinner>
+            <span>{{ statusMessage() || t('Acquiring location...')() }}</span>
+        </div>
+      } @else {
+        <p class="text-lg font-semibold text-teal-400">{{ t('Distance')() }}: {{ distance().toFixed(0) }} {{ t('km')() }}</p>
+        <p class="text-sm text-slate-500">{{ statusMessage() }}</p>
+      }
+
+      <!-- Recalibration Prompt -->
+      @if(showRecalibrationPrompt()) {
+        <div class="p-3 bg-amber-900/40 border-l-4 border-amber-500 text-amber-200 text-sm text-left rtl:text-right">
+            <p class="font-semibold">{{ t('Compass unstable.')() }}</p>
+            <p>{{ t('For better accuracy, please recalibrate.')() }}</p>
+            <button (click)="recalibrate()" class="mt-2 text-amber-300 font-bold hover:underline">
+                {{ t('Recalibrate')() }}
+            </button>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+} @else {
+  <div class="space-y-6 flex flex-col items-center text-center max-w-md mx-auto">
+    <h1 class="text-2xl font-bold text-teal-400 font-amiri">{{ t('Calibrate Compass')() }}</h1>
+    <p class="text-slate-400">
+      {{ t('For best results, move your phone in a figure-eight pattern to calibrate the compass.')() }}
+    </p>
+    <div class="py-4">
+      <app-figure-eight-icon></app-figure-eight-icon>
+    </div>
+    <button (click)="markAsCalibrated()" class="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors">
+      {{ t('Done')() }}
+    </button>
+  </div>
+}

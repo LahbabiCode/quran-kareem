@@ -1,0 +1,257 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950">
+  <div class="container mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-emerald-300 mb-2 font-amiri">
+        {{ t('Adhkar')() }}
+      </h1>
+      <p class="text-slate-300 text-lg">
+        {{ lang() === 'ar' ? 'اذكر الله في جميع الأوقات واحصل على الأجر العظيم' : 'Remember Allah at all times and gain great reward' }}
+      </p>
+    </div>
+
+    <!-- Category Selection -->
+    <div class="mb-8">
+      <div class="flex flex-wrap justify-center gap-4">
+        @for (category of adhkarCategories(); track category.id) {
+          <button 
+            (click)="selectCategory(category)"
+            [class]="'px-6 py-3 rounded-xl font-medium transition-all duration-300 ' + 
+            (selectedCategory().id === category.id 
+              ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-500/25' 
+              : 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/60 border border-slate-600')"
+          >
+            {{ lang() === 'ar' ? category.name : category.nameEn }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="mb-8">
+      <div class="bg-slate-800/60 backdrop-blur-xl rounded-2xl p-6 border border-slate-700">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-bold text-slate-200 font-amiri">
+            {{ lang() === 'ar' ? selectedCategory().name : selectedCategory().nameEn }}
+          </h3>
+          <span class="text-emerald-400 font-medium">
+            {{ progress().completed }} / {{ progress().total }}
+          </span>
+        </div>
+        
+        <div class="w-full bg-slate-700 rounded-full h-3">
+          <div 
+            class="bg-gradient-to-r from-emerald-500 to-emerald-400 h-3 rounded-full transition-all duration-500"
+            [style.width.%]="progress().percentage"
+          ></div>
+        </div>
+        
+        <div class="text-center mt-3">
+          <span class="text-sm text-slate-400">
+            {{ progress().percentage.toFixed(0) }}% {{ t('Completed')() }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Adhkar List -->
+    <div class="space-y-6 mb-8">
+      @for (dhikr of selectedCategory().adhkar; track dhikr.id) {
+        <div class="bg-slate-800/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-700 transition-all duration-300"
+             [class.ring-2]="dhikr.completed"
+             [class.ring-emerald-400]="dhikr.completed"
+             [class.bg-emerald-950/30]="dhikr.completed">
+          
+          <!-- Arabic Text -->
+          <div class="text-right mb-4">
+            <p class="text-2xl leading-relaxed text-slate-100 font-amiri">
+              {{ dhikr.arabic }}
+            </p>
+          </div>
+
+          <!-- Transliteration -->
+          @if (lang() === 'en') {
+            <div class="mb-4">
+              <p class="text-slate-300 italic text-sm leading-relaxed">
+                {{ dhikr.transliteration }}
+              </p>
+            </div>
+          }
+
+          <!-- Translation -->
+          <div class="mb-6">
+            <p class="text-slate-300 leading-relaxed">
+              {{ dhikr.translation }}
+            </p>
+          </div>
+
+          <!-- Counter and Action -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4 rtl:space-x-reverse">
+              <!-- Counter Display -->
+              <div class="text-center">
+                <div class="text-lg font-bold text-emerald-300">
+                  {{ dhikr.count }} / {{ dhikr.maxCount }}
+                </div>
+                <div class="text-xs text-slate-400">
+                  {{ t('times')() }}
+                </div>
+              </div>
+
+              <!-- Progress Circle -->
+              <div class="relative w-12 h-12">
+                <svg class="w-12 h-12 transform -rotate-90">
+                  <circle 
+                    cx="24" 
+                    cy="24" 
+                    r="20" 
+                    stroke="currentColor" 
+                    stroke-width="4" 
+                    fill="transparent"
+                    class="text-slate-600"
+                  />
+                  <circle 
+                    cx="24" 
+                    cy="24" 
+                    r="20" 
+                    stroke="currentColor" 
+                    stroke-width="4" 
+                    fill="transparent"
+                    [stroke-dasharray]="125.6"
+                    [stroke-dashoffset]="125.6 - (dhikr.count / dhikr.maxCount) * 125.6"
+                    class="text-emerald-400 transition-all duration-300"
+                  />
+                </svg>
+                
+                @if (dhikr.completed) {
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- Action Button -->
+            <button 
+              (click)="incrementCount(dhikr)"
+              [disabled]="dhikr.completed"
+              [class]="'px-6 py-2 rounded-lg font-medium transition-all duration-300 ' + 
+              (dhikr.completed 
+                ? 'bg-emerald-600 text-white cursor-default' 
+                : 'bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white shadow-lg')"
+            >
+              @if (dhikr.completed) {
+                <span>{{ t('Completed')() }} ✓</span>
+              } @else {
+                <span>{{ t('Read')() }}</span>
+              }
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex justify-center gap-4 mb-8">
+      <button 
+        (click)="resetCategory()"
+        class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-xl font-medium 
+               transition-colors duration-300 shadow-lg"
+      >
+        {{ t('Reset Category')() }}
+      </button>
+      
+      <button 
+        (click)="resetAll()"
+        class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium 
+               transition-colors duration-300 shadow-lg"
+      >
+        {{ t('Reset All')() }}
+      </button>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="bg-slate-800/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-700">
+      <h3 class="text-xl font-bold text-slate-200 mb-4 text-center font-amiri">
+        {{ t('Benefits of Regular Dhikr')() }}
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <p class="text-slate-300 text-sm">
+            {{ t('Heart Purification')() }}
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <p class="text-slate-300 text-sm">
+            {{ t('Divine Protection')() }}
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <p class="text-slate-300 text-sm">
+            {{ t('Increased Barakah')() }}
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <p class="text-slate-300 text-sm">
+            {{ t('Peace of Mind')() }}
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-rose-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-rose-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <p class="text-slate-300 text-sm">
+            {{ t('Spiritual Elevation')() }}
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-teal-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-teal-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
+            </svg>
+          </div>
+          <p class="text-slate-300 text-sm">
+            {{ t('Community Blessing')() }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="mt-6 text-center">
+      <p class="text-slate-400 text-sm">
+        {{ t('Read each dhikr the specified number of times. Click the Read button after completing each recitation.')() }}
+      </p>
+    </div>
+  </div>
+</div>

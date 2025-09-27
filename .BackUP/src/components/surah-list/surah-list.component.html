@@ -1,0 +1,40 @@
+<div class="space-y-6">
+  <h1 class="text-3xl font-bold text-teal-400 font-amiri">{{ t('All Surahs')() }}</h1>
+
+  @if (!surahs()?.length) {
+    <div class="flex justify-center items-center py-20">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      @for (surah of surahs(); track surah.id) {
+        <a [routerLink]="['/surah', surah.id]" class="group block p-4 bg-slate-800/50 border border-slate-700 rounded-lg hover:shadow-lg hover:shadow-teal-500/10 hover:border-teal-500 transition-all duration-200">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4 rtl:space-x-reverse">
+              <span class="flex items-center justify-center w-10 h-10 bg-slate-700 rounded-md text-teal-400 font-semibold">{{ surah.id }}</span>
+              <div>
+                <h2 class="text-lg font-semibold text-slate-100">{{ surah.name }}</h2>
+                <p class="text-sm text-slate-400">{{ surah.englishName }}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="text-right">
+                  <p class="font-amiri text-xl text-teal-400">{{ surah.arabicName }}</p>
+                  <p class="text-xs text-slate-500">
+                    {{ surah.numberOfAyahs }} {{ t('Ayahs')() }} &middot; {{ getRevelationType(surah) }}
+                  </p>
+                </div>
+                <button (click)="$event.preventDefault(); toggleFavorite(surah.id)" class="relative z-10 p-2 rounded-full text-slate-400 hover:bg-slate-700 transition-colors" [title]="isFavorite(surah.id)() ? t('Remove from favorites')() : t('Add to favorites')()">
+                  @if(isFavorite(surah.id)()) {
+                    <app-star-solid-icon class="text-yellow-500"></app-star-solid-icon>
+                  } @else {
+                    <app-star-icon class="group-hover:text-yellow-500"></app-star-icon>
+                  }
+                </button>
+            </div>
+          </div>
+        </a>
+      }
+    </div>
+  }
+</div>

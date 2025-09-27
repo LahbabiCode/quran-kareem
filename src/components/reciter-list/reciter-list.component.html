@@ -1,0 +1,46 @@
+<div class="space-y-6">
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <h1 class="text-3xl font-bold text-teal-400 font-amiri">{{ t('All Reciters')() }}</h1>
+    <div class="flex flex-col sm:flex-row gap-4">
+      <!-- Search Box -->
+      <div class="relative w-full sm:w-64">
+        <div class="absolute inset-y-0 left-0 rtl:left-auto rtl:right-0 flex items-center pl-3 rtl:pl-0 rtl:pr-3 pointer-events-none">
+          <app-search-icon class="text-slate-400"></app-search-icon>
+        </div>
+        <input 
+            type="text" 
+            [placeholder]="t('Search Reciters...')()" 
+            (input)="onSearch($event)" 
+            class="w-full pl-10 rtl:pl-4 rtl:pr-10 pr-4 py-2 bg-slate-800 border border-slate-600 text-slate-200 rounded-lg focus:ring-teal-500 focus:border-teal-500" />
+      </div>
+    </div>
+  </div>
+
+  @if (!reciters()?.length) {
+  <div class="flex justify-center items-center py-20">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  } @else if (!filteredReciters()?.length) {
+  <div class="flex justify-center items-center py-20">
+    <p>{{ t('No reciters found.')() }}</p>
+  </div>
+  } @else {
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    @for (reciter of filteredReciters(); track reciter.id) {
+    <a [routerLink]="['/reciter', reciter.id]" class="group block p-4 bg-slate-800/50 border border-slate-700 rounded-lg shadow-sm hover:border-teal-500 hover:shadow-lg hover:shadow-teal-500/10 transition-all duration-200 hover:-translate-y-1">
+      <div class="flex flex-col h-full">
+        <div class="min-w-0 flex-grow">
+          <h2 class="text-md font-semibold text-slate-100 group-hover:text-teal-300 transition-colors" [title]="reciter.name">{{ reciter.name }}</h2>
+          <p class="text-sm text-slate-400">{{ reciter.rewaya }}</p>
+        </div>
+        <div class="mt-2">
+          <span class="inline-block bg-slate-700 text-teal-400 text-xs font-semibold px-2 py-1 rounded-full">
+            {{ reciter.count }} {{ t('Surahs')() }}
+          </span>
+        </div>
+      </div>
+    </a>
+    }
+  </div>
+  }
+</div>

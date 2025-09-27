@@ -1,0 +1,61 @@
+<header class="bg-slate-950/80 backdrop-blur-xl shadow-sm sticky top-0 z-40 border-b border-slate-800">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a routerLink="/" class="text-2xl font-bold text-teal-400 font-amiri tracking-wider">
+        {{ t('Quran Kareem')() }}
+      </a>
+      <nav class="hidden md:flex items-center space-x-2 rtl:space-x-reverse">
+        <a routerLink="/" routerLinkActive="text-teal-300 font-medium" [routerLinkActiveOptions]="{exact: true}" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Home')() }}</a>
+        <a routerLink="/surahs" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Surahs')() }}</a>
+        <a routerLink="/reciters" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Reciters')() }}</a>
+        <a routerLink="/radio" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Radio')() }}</a>
+        <a routerLink="/favorites" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Favorites')() }}</a>
+        <a routerLink="/bookmarks" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Bookmarks')() }}</a>
+        <a routerLink="/qibla" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Qibla')() }}</a>
+        <a routerLink="/prayer-times" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Prayer Times')() }}</a>
+        
+        <!-- قسم المزيد -->
+        <div class="relative">
+          <button (click)="toggleMoreMenu()" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md flex items-center space-x-1 rtl:space-x-reverse">
+            <span>{{ t('More')() }}</span>
+            <svg class="w-4 h-4 transition-transform" [class.rotate-180]="isMoreMenuOpen()" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          
+          @if(isMoreMenuOpen()) {
+            <div class="absolute right-0 rtl:left-0 rtl:right-auto mt-2 w-56 rounded-md shadow-lg bg-slate-800 ring-1 ring-slate-700 z-50">
+              <div class="py-1">
+                <!-- الخدمات الدينية -->
+                <div class="px-3 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-slate-700">{{ t('Religious Services')() }}</div>
+                <a routerLink="/tasbih" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('Digital Tasbih')() }}</a>
+                <a routerLink="/adhkar" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('Adhkar')() }}</a>
+                <a routerLink="/asma-ul-husna" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('99 Names of Allah')() }}</a>
+                <a routerLink="/hadith" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('Hadith')() }}</a>
+                
+                <!-- أدوات مفيدة -->
+                <div class="px-3 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-t border-slate-700 mt-1">{{ t('Useful Tools')() }}</div>
+                <a routerLink="/zakat-calculator" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('Zakat Calculator')() }}</a>
+                <a routerLink="/quran-plan" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('Quran Reading Plan')() }}</a>
+                <a routerLink="/islamic-calendar" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('Islamic Calendar')() }}</a>
+                
+                <!-- معلومات -->
+                <div class="px-3 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-t border-slate-700 mt-1">{{ t('Information')() }}</div>
+                <a routerLink="/about" (click)="closeMoreMenu()" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-teal-300 transition-colors">{{ t('About')() }}</a>
+              </div>
+            </div>
+          }
+        </div>
+      </nav>
+      <div class="flex items-center">
+        <button (click)="toggleLanguage()" class="flex items-center justify-center w-24 h-9 rounded-md bg-slate-800 hover:bg-slate-700 transition-colors text-sm font-medium text-slate-200 border border-slate-700">
+          @if(lang() === 'ar') {
+            <span>English</span>
+          } @else {
+            <span>العربية</span>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

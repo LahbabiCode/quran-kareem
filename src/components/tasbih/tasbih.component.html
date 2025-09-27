@@ -1,0 +1,168 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950">
+  <div class="container mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-teal-300 mb-2 font-amiri">
+        {{ t('Digital Tasbih')() }}
+      </h1>
+      <p class="text-slate-300 text-lg">
+        {{ lang() === 'ar' ? 'سبح الله واذكره في كل وقت' : 'Remember Allah and glorify Him at all times' }}
+      </p>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <!-- Current Count -->
+      <div class="bg-slate-800/60 backdrop-blur-xl rounded-2xl p-6 border border-slate-700 text-center">
+        <div class="text-3xl font-bold text-teal-300 mb-2">{{ currentCount() }}</div>
+        <div class="text-slate-300 font-medium">{{ t('Current Count')() }}</div>
+        <div class="text-sm text-slate-400 mt-1">
+          {{ lang() === 'ar' ? selectedTasbih().text : selectedTasbih().textEn }}
+        </div>
+      </div>
+
+      <!-- Total Count -->
+      <div class="bg-slate-800/60 backdrop-blur-xl rounded-2xl p-6 border border-slate-700 text-center">
+        <div class="text-3xl font-bold text-emerald-300 mb-2">{{ totalCount() }}</div>
+        <div class="text-slate-300 font-medium">{{ t('Total Count')() }}</div>
+        <div class="text-sm text-slate-400 mt-1">{{ t('All Tasbihat')() }}</div>
+      </div>
+
+      <!-- Current Round -->
+      <div class="bg-slate-800/60 backdrop-blur-xl rounded-2xl p-6 border border-slate-700 text-center">
+        <div class="text-3xl font-bold text-amber-300 mb-2">{{ currentRound() }}</div>
+        <div class="text-slate-300 font-medium">{{ t('Current Round')() }}</div>
+        <div class="text-sm text-slate-400 mt-1">{{ t('33 per round')() }}</div>
+      </div>
+    </div>
+
+    <!-- Tasbih Selection -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold text-slate-200 mb-4 text-center font-amiri">
+        {{ t('Choose Tasbih')() }}
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        @for (tasbih of tasbihat(); track tasbih.id) {
+          <button 
+            (click)="selectTasbih(tasbih)"
+            [class]="'p-4 rounded-xl border transition-all duration-300 text-center ' + 
+            (selectedTasbih().id === tasbih.id 
+              ? 'bg-teal-600 border-teal-400 text-white shadow-lg shadow-teal-500/25' 
+              : 'bg-slate-800/60 border-slate-600 text-slate-300 hover:bg-slate-700/60 hover:border-slate-500')"
+          >
+            <div class="text-lg font-bold font-amiri mb-1">
+              {{ lang() === 'ar' ? tasbih.text : tasbih.textEn }}
+            </div>
+            <div class="text-sm opacity-75">{{ tasbih.count }} {{ t('times')() }}</div>
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Main Counter Button -->
+    <div class="flex justify-center mb-8">
+      <button 
+        (click)="increment()"
+        class="w-80 h-80 bg-gradient-to-br from-teal-500 to-teal-700 hover:from-teal-400 hover:to-teal-600 
+               rounded-full shadow-2xl shadow-teal-500/30 transition-all duration-200 
+               active:scale-95 active:shadow-teal-500/50 border-4 border-teal-300/20
+               flex flex-col items-center justify-center group"
+      >
+        <!-- Icon or Number Display -->
+        <div class="text-white text-6xl font-bold mb-4">
+          {{ currentCount() }}
+        </div>
+        
+        <!-- Current Tasbih Text -->
+        <div class="text-white/90 text-center px-4">
+          <div class="text-xl font-bold font-amiri mb-1">
+            {{ lang() === 'ar' ? selectedTasbih().text : selectedTasbih().textEn }}
+          </div>
+          <div class="text-sm opacity-75">{{ t('Tap to count')() }}</div>
+        </div>
+
+        <!-- Ripple Effect -->
+        <div class="absolute inset-0 rounded-full bg-white/10 scale-0 group-active:scale-100 transition-transform duration-300"></div>
+      </button>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex justify-center gap-4 mb-8">
+      <button 
+        (click)="resetCurrent()"
+        class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-xl font-medium 
+               transition-colors duration-300 shadow-lg"
+      >
+        {{ t('Reset Current')() }}
+      </button>
+      
+      <button 
+        (click)="reset()"
+        class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium 
+               transition-colors duration-300 shadow-lg"
+      >
+        {{ t('Reset All')() }}
+      </button>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="bg-slate-800/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-700">
+      <h3 class="text-xl font-bold text-slate-200 mb-4 text-center font-amiri">
+        {{ t('Spiritual Benefits')() }}
+      </h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-teal-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-teal-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <p class="text-slate-300 text-sm">
+            {{ t('Inner Peace and Tranquility')() }}
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <p class="text-slate-300 text-sm">
+            {{ t('Spiritual Strength')() }}
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <p class="text-slate-300 text-sm">
+            {{ t('Mindfulness and Focus')() }}
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <p class="text-slate-300 text-sm">
+            {{ t('Divine Connection')() }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="mt-6 text-center">
+      <p class="text-slate-400 text-sm">
+        {{ t('Tap the circle to count your dhikr. Each complete round consists of 33 repetitions.')() }}
+      </p>
+    </div>
+  </div>
+</div>

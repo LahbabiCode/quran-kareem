@@ -1,0 +1,29 @@
+<header class="bg-slate-950/80 backdrop-blur-xl shadow-sm sticky top-0 z-40 border-b border-slate-800">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a routerLink="/" class="text-2xl font-bold text-teal-400 font-amiri tracking-wider">
+        {{ t('Quran Kareem')() }}
+      </a>
+      <nav class="hidden md:flex items-center space-x-2 rtl:space-x-reverse">
+        <a routerLink="/" routerLinkActive="text-teal-300 font-medium" [routerLinkActiveOptions]="{exact: true}" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Home')() }}</a>
+        <a routerLink="/surahs" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Surahs')() }}</a>
+        <a routerLink="/reciters" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Reciters')() }}</a>
+        <a routerLink="/radio" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Radio')() }}</a>
+        <a routerLink="/favorites" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Favorites')() }}</a>
+        <a routerLink="/bookmarks" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Bookmarks')() }}</a>
+        <a routerLink="/qibla" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Qibla')() }}</a>
+        <a routerLink="/prayer-times" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('Prayer Times')() }}</a>
+        <a routerLink="/about" routerLinkActive="text-teal-300 font-medium" class="text-slate-300 hover:text-teal-300 transition-colors px-3 py-2 rounded-md">{{ t('About')() }}</a>
+      </nav>
+      <div class="flex items-center">
+        <button (click)="toggleLanguage()" class="flex items-center justify-center w-24 h-9 rounded-md bg-slate-800 hover:bg-slate-700 transition-colors text-sm font-medium text-slate-200 border border-slate-700">
+          @if(lang() === 'ar') {
+            <span>English</span>
+          } @else {
+            <span>العربية</span>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

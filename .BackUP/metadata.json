@@ -1,0 +1,7 @@
+{
+  "name": "Quran Kareem v6",
+  "description": "A comprehensive Quran application to read, listen, and explore the Holy Quran. It features multiple reciters, radio stations, translations, and a beautiful, user-friendly interface. All data is sourced live from public Quran APIs.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

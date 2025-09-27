@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+
+:root {
+  /* Design tokens - colors */
+  --color-primary: #0B6B3A;
+  --color-primary-600: #095c33;
+  --color-accent: #C9A04A;
+  --color-soft-bg: #F6F4EE;
+  --color-muted: #9CA3AF;
+  --color-dark-text: #0F1722;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+
+  /* Font stacks */
+  --font-arabic: 'Noto Naskh Arabic', 'Tajawal', sans-serif;
+  --font-ui: 'Inter', system-ui, sans-serif;
+}
+
+/* Base reset and usage */
+@layer base {
+  html, body {
+    height: 100%;
+    background-color: var(--color-soft-bg);
+    color: var(--color-dark-text);
+    font-family: var(--font-arabic);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-ui);
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Example component tokens mapped to utilities */
+.btn-primary {
+  @apply bg-primary text-white px-4 py-2 rounded-md;
+}
+
+.card {
+  @apply bg-white shadow-sm rounded-md p-4;
+}
