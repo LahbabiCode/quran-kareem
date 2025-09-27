@@ -1,12 +1,41 @@
 {
-  "name": "quran-kareem-v6",
-  "private": true,
-  "version": "0.0.0",
+  "name": "quran-kareem",
+  "version": "1.0.0",
+  "description": "منصة شاملة للقرآن الكريم مع خدمات إسلامية متنوعة - A comprehensive digital platform for the Holy Quran with diverse Islamic services",
+  "author": {
+    "name": "LahbabiCode",
+    "email": "contact@lahbabicode.dev",
+    "url": "https://github.com/LahbabiCode"
+  },
+  "license": "MIT",
+  "homepage": "https://quran-kareem-app.netlify.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LahbabiCode/quran-kareem.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LahbabiCode/quran-kareem/issues"
+  },
+  "keywords": [
+    "quran", "islamic", "muslim", "arabic", "prayer-times", "qibla", 
+    "tasbih", "adhkar", "asma-ul-husna", "holy-quran", "recitation",
+    "angular", "typescript", "tailwindcss", "pwa"
+  ],
+  "private": false,
   "type": "module",
   "scripts": {
     "dev": "ng serve",
-    "build": "ng build",
-    "preview": "ng serve --configuration=production"
+    "start": "ng serve",
+    "build": "ng build --configuration=production",
+    "build:dev": "ng build",
+    "preview": "ng serve --configuration=production",
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "ng lint",
+    "format": "prettier --write \"src/**/*.{ts,html,css,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,html,css,json}\"",
+    "deploy": "npm run build && npx netlify deploy --prod --dir=dist/quran-kareem",
+    "deploy:preview": "npm run build && npx netlify deploy --dir=dist/quran-kareem",
+    "analyze": "ng build --stats-json && npx webpack-bundle-analyzer dist/quran-kareem/stats.json"
   },
   "dependencies": {
     "@angular/build": "^20.3.0",

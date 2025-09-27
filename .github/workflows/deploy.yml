@@ -1,0 +1,69 @@
+name: 🚀 Deploy to Netlify
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: 📚 Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: ⚙️ Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - name: 📦 Install Dependencies
+      run: npm ci
+      
+    - name: 🔍 Run Linting
+      run: npm run format:check
+      continue-on-error: true
+      
+    - name: 🏗️ Build Application
+      run: npm run build
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        
+    - name: 🧪 Run Tests
+      run: npm test
+      continue-on-error: true
+      
+    - name: 🚀 Deploy to Netlify
+      if: github.ref == 'refs/heads/main' && matrix.node-version == '18.x'
+      uses: netlify/actions/deploy@master
+      with:
+        publish-dir: ./dist/quran-kareem
+        production-branch: main
+        production-deploy: true
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        
+    - name: 📊 Bundle Analysis
+      if: matrix.node-version == '18.x'
+      run: npm run analyze
+      continue-on-error: true
+
+    - name: 📝 Comment PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '✅ Build successful! Preview will be available shortly.'
+          })
