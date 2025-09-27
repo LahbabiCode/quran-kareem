@@ -4,35 +4,74 @@
 
 ### 📦 **إعداد النشر التلقائي | Automatic Deployment**
 
-1. **ربط المشروع  :**
+1. **ربط المشروع بـ Netlify:**
    - اربط حساب GitHub الخاص بك
    - اختر مستودع `quran-kareem`
+   - سيتم النشر تلقائياً عند كل push
 
 2. **إعدادات البناء:**
    ```
    Build command: npm run build
    Publish directory: dist/quran-kareem-v6
+   Node version: 20 (مهم جداً!)
    ```
 
-3. **متغيرات البيئة:**
+3. **متغيرات البيئة المطلوبة:**
    ```
    GEMINI_API_KEY = your_gemini_api_key
-   NODE_VERSION = 18
+   NODE_VERSION = 20
+   NPM_FLAGS = --legacy-peer-deps
    ```
 
 4. **النشر اليدوي:**
    ```bash
+   # تثبيت Netlify CLI
+   npm install -g netlify-cli
+   
    # بناء المشروع
    npm run build
    
-   # رفع مجلد dist إلى Netlify
-   npx netlify deploy --prod --dir=dist/quran-kareem-v6
+   # النشر الأولي
+   netlify deploy --prod --dir=dist/quran-kareem-v6
    ```
 
+### 🔧 **إصلاح مشاكل النشر الشائعة | Common Deployment Issues**
+
+#### ❌ **مشكلة Node.js Version**
+```
+Error: Node.js version v18.20.8 detected. Angular CLI requires v20.19+
+```
+**الحل:**
+- تأكد من تعديل `netlify.toml`: `NODE_VERSION = "20"`
+- أو أضف متغير البيئة في Netlify Dashboard
+
+#### ❌ **مشكلة Build Command**
+```
+Error: Build script returned non-zero exit code
+```
+**الحل:**
+```bash
+# تنظيف التثبيتات
+rm -rf node_modules package-lock.json
+npm install
+
+# اختبار البناء محلياً
+npm run build
+```
+
+#### ❌ **مشكلة API Keys**
+```
+Error: Missing GEMINI_API_KEY
+```
+**الحل:**
+1. احصل على API key من [Google AI Studio](https://aistudio.google.com/)
+2. أضفه في Netlify: `Site Settings > Environment Variables`
+
 ### 🔧 **ملفات الإعداد | Configuration Files**
-- `netlify.toml` - إعدادات Netlify
-- `angular.json` - إعدادات Angular
-- `package.json` - سكريبت البناء
+- `netlify.toml` - إعدادات Netlify مع Node v20
+- `angular.json` - إعدادات Angular والبناء
+- `package.json` - المتطلبات وسكريبت البناء
+- `.env.example` - مثال لمتغيرات البيئة
 
 ---
 
