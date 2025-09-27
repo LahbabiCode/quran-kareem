@@ -1,11 +1,10 @@
 ---
 
-## 🌍 النشر على Netlify | Netlify Deployment
+## 🌍 النشر   |  Deployment
 
 ### 📦 **إعداد النشر التلقائي | Automatic Deployment**
 
-1. **ربط المشروع بـ Netlify:**
-   - قم بتسجيل الدخول إلى [Netlify](https://netlify.com)
+1. **ربط المشروع  :**
    - اربط حساب GitHub الخاص بك
    - اختر مستودع `quran-kareem`
 
@@ -189,8 +188,8 @@ copies of the Software...
 **للاستفسارات والدعم:**
 
 [![GitHub](https://img.shields.io/badge/GitHub-LahbabiCode-black?style=for-the-badge&logo=github)](https://github.com/LahbabiCode)
-[![Email](https://img.shields.io/badge/Email-Contact-blue?style=for-the-badge&logo=gmail)](mailto:contact@lahbabicode.dev)
-[![Website](https://img.shields.io/badge/Website-Portfolio-green?style=for-the-badge&logo=google-chrome)](https://lahbabicode.dev)
+[![Email](https://img.shields.io/badge/Email-Contact-blue?style=for-the-badge&logo=gmail)](mailto:info@zakariaelahbabi.com)
+[![Website](https://img.shields.io/badge/Website-Portfolio-green?style=for-the-badge&logo=google-chrome)](https://zakariaelahbabi.com)
 
 </div>
 
