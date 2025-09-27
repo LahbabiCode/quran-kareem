@@ -45,7 +45,7 @@
     "build": "ng build --configuration=production && npm run postbuild",
     "build:dev": "ng build",
     "postbuild": "npm run copy-assets",
-    "copy-assets": "copyfiles -f dist/public/* dist/",
+    "copy-assets": "copyfiles -f dist/public/.* dist/public/* dist/",
     "preview": "ng serve --configuration=production",
     "test": "echo \"No tests specified\" && exit 0",
     "lint": "ng lint",
