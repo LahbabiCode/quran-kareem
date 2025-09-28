@@ -558,7 +558,7 @@ import { LanguageService } from '../../services/language.service';
 })
 export class FooterComponent {
   currentYear = new Date().getFullYear();
-  currentLanguage = computed(() => this.languageService.currentLanguage());
+  currentLanguage = computed(() => this.languageService.language());
 
   constructor(public languageService: LanguageService) {}
 
